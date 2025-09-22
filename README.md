@@ -1,35 +1,39 @@
-# fire_exinguisher_site
+# Brave Heart Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+This is the frontend for **Brave Heart**, developed using [Vue 3](https://vuejs.org/) and [Vite](https://vitejs.dev/). It serves as the customer interface for a fire extinguihser shop management system.
 
 ## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Volar Extension](https://marketplace.visualstudio.com/items?itemName=Vue.volar)  
+  (Make sure to **disable Vetur** if it's installed.)
 
 ## Project Setup
 
-```sh
+Install dependencies:
+
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Start Development Server
 
-```sh
+```bash
 npm run dev
 ```
 
-### Compile and Minify for Production
+### Build for Production
 
-```sh
+```bash
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### Lint Project Files
 
-```sh
+```bash
 npm run lint
 ```
+
+## Configuration
+
+For advanced configuration options, refer to the [Vite Configuration Reference](https://vitejs.dev/config/).
