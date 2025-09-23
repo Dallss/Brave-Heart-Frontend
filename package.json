@@ -12,7 +12,7 @@
     "preview": "vite preview",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "deploy": "npm run build && npm run postbuild && gh-pages -d dist"
+    "deploy": "npm run build && git push origin `git subtree split --prefix dist main`:refs/heads/gh-pages --force"
   },
   "dependencies": {
     "axios": "^1.10.0",
