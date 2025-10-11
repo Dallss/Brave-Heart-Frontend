@@ -1,5 +1,6 @@
 <template>
   <base-section class="title-page" height="fit-content">
+
     <div class="left page-part">
       <div class="nav">
         <div class="link">
@@ -57,6 +58,7 @@
         <TypeSelector class="type-selector" v-model:selected="extinguisherType" />
       </div>
     </div>
+
   </base-section>
 </template>
 
@@ -148,7 +150,7 @@ const nextSlide = () => {
 .left {
   display: flex;
   justify-content: center;
-  background-color: #510f0f;
+  background-color: #420707;
   color: white;
 }
 .right {
@@ -167,12 +169,18 @@ const nextSlide = () => {
   position: absolute;
   left: 0;
   top: 0;
-  padding: 5px;
-  color: white;
+  padding: 10px;
   font-size: large;
   height: fit-content;
   margin: 0;
 }
+
+.link a {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+}
+
 .title {
   height: 65vh;
   align-self: center;
