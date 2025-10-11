@@ -1,12 +1,13 @@
 # Brave Heart Frontend
 
-This is the frontend for **Brave Heart**, developed using [Vue 3](https://vuejs.org/) and [Vite](https://vitejs.dev/). It serves as the customer interface for a fire extinguihser shop management system.
+This is the frontend for **Brave Heart**, developed using [Vue 3](https://vuejs.org/) and [Vite](https://vitejs.dev/). 
+It is a public website of Brave Heart Fire Safety. 
+It serves as the customer interface for a fire extinguisher shop management system.
 
-## Recommended IDE Setup
 
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [Volar Extension](https://marketplace.visualstudio.com/items?itemName=Vue.volar)  
-  (Make sure to **disable Vetur** if it's installed.)
+###  Deployed
+- https://braveheart-firesafety.netlify.app/
+
 
 ## Project Setup
 
