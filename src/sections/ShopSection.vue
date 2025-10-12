@@ -90,7 +90,7 @@ onMounted(() => {
   background-color: #f5f5f5;
 }
 .shop-header {
-  font-size: 2.5rem;
+  font-size: clamp(1rem, 2vw + 0.5rem, 2.5rem);
   font-weight: 600;
   color: #000000;
   margin-bottom: 2rem;

@@ -40,14 +40,14 @@ import BaseSection from './BaseSection.vue'
 }
 
 .about-us-title {
-  font-size: 2.5rem;
+  font-size: clamp(1rem, 2vw + 0.5rem, 2.5rem);
   font-weight: 600;
   color: #000000;
   margin-bottom: 2rem;
 }
 
 .about-us-paragraph {
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 0.8vw + 0.6rem, 1.1rem);
   line-height: 1.8;
   margin-bottom: 1.5rem;
   color: #333;

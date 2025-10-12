@@ -51,7 +51,7 @@ import BaseSection from './BaseSection.vue'
 }
 
 .how-to-use-title {
-  font-size: 2.5rem;
+  font-size: clamp(1rem, 2vw + 0.5rem, 2.5rem);
   font-weight: 600;
   color: black;
   margin-bottom: 1.5rem;
