@@ -8,9 +8,10 @@ import ShopSection from '../sections/ShopSection.vue'
 
 <template>
   <div class="app-wrapper">
-    <div class="header">
+    <!-- This is just a black header where the shopping cart button is. commented out because ther is no shopping cart button yet -->
+    <!-- <div class="header">
       <router-link to="/cart" class="cart-button"></router-link>
-    </div>
+    </div> -->
     <HeadSection />
     <ShopSection id="shop" />
     <HowToUseSection id="how-to-use" />
@@ -20,19 +21,25 @@ import ShopSection from '../sections/ShopSection.vue'
 </template>
 
 <style>
-html,
-body,
-#app,
 .app-wrapper {
   height: fit-content;
+  min-height: 100vh;
   width: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Inter', sans-serif;
+  position: relative;
+
   background-color: black;
+  font-family: 'Inter', sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
 }
 
-body::before {
+/* Maybe this has something to do with header with shopping cart. if not DELETE this */
+/* body::before {
   content: '';
   position: fixed;
   top: -100px;
@@ -41,18 +48,8 @@ body::before {
   height: 500px;
   background-color: black;
   z-index: -1;
-}
+} */
 
-.app-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  width: 100%;
-  color: black;
-}
 
 /* .cart-button {
   height: 40%;

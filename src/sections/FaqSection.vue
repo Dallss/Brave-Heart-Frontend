@@ -73,7 +73,7 @@ import BaseSection from './BaseSection.vue'
 }
 
 .faq-title {
-  font-size: 2.25rem;
+  font-size: clamp(1rem, 2vw + 0.5rem, 2.5rem);
   font-weight: 600;
   color: #111111;
   margin-bottom: 2rem;
@@ -92,13 +92,13 @@ import BaseSection from './BaseSection.vue'
 
 .faq-question {
   font-weight: 600;
-  font-size: 1.125rem;
+  font-size: clamp(0.9rem, 0.8vw + 0.6rem, 1.1rem);
   margin-bottom: 0.4rem;
   line-height: 1.5;
 }
 
 .faq-answer {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 0.8vw + 0.6rem, 1rem);
   line-height: 1.75;
   padding-left: 0.25rem;
   color: #333333;

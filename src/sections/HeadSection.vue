@@ -1,5 +1,6 @@
 <template>
   <base-section class="title-page" height="fit-content">
+
     <div class="left page-part">
       <div class="nav">
         <div class="link">
@@ -20,8 +21,8 @@
 
         <div class="contact-info">
           <p class="contact-header">Contact Us</p>
-          <p class="contact-phone"><strong>Phone:</strong> 123-456-7890</p>
-          <p class="contact-email"><strong>Email:</strong> info@alexanderextinguisher.com</p>
+          <p class="contact-phone">123-456-7890</p>
+          <p class="contact-email">info@alexanderextinguisher.com</p>
         </div>
       </div>
     </div>
@@ -57,6 +58,7 @@
         <TypeSelector class="type-selector" v-model:selected="extinguisherType" />
       </div>
     </div>
+
   </base-section>
 </template>
 
@@ -145,10 +147,16 @@ const nextSlide = () => {
   position: relative;
   min-width: 550px;
 }
+/* Disable min-width on mobile */
+@media (max-width: 550px) {
+  .page-part {
+    min-width: 100%; /* or simply remove the restriction */
+  }
+}
 .left {
   display: flex;
   justify-content: center;
-  background-color: #510f0f;
+  background-color: #420707;
   color: white;
 }
 .right {
@@ -158,48 +166,70 @@ const nextSlide = () => {
   height: 90vh;
   min-width: 700px;
 }
+
+/*
+TODO: remove this and make component work
+Context: This removes .rigth for viewports under 700 (such as mobile) due to css issues.
+*/
+@media (max-width: 700px) {
+  .right {
+    display: none;
+  }
+}
 .page-header {
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 80%;
 }
 .nav {
   position: absolute;
   left: 0;
   top: 0;
-  padding: 5px;
-  color: white;
+  padding: 10px;
   font-size: large;
   height: fit-content;
   margin: 0;
 }
+
+.link a {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+}
+
 .title {
   height: 65vh;
   align-self: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: 90%;
 }
 .main-title {
-  font-size: 5rem;
+  font-size: clamp(2.5rem, 5vw + 1rem, 5rem);
   font-weight: 600;
   line-height: 1.2;
-  max-width: 600px;
 }
 .subtitle {
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 1.2vw + 0.5rem, 1.5rem);
   font-weight: 200;
   font-style: italic;
 }
 .contact-info {
-  padding-left: 6rem;
+  justify-content: center;
 }
 .contact-header {
   font-size: 1.2rem;
   font-weight: 600;
   margin-top: 0;
 }
-
+.contact-header,
+.contact-phone,
+.contact-email {
+  text-align: center;
+  margin-bottom: 10px;
+}
 .type-select-content {
   position: relative;
   width: 100%;
