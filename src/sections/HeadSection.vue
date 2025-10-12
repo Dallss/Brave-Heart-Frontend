@@ -166,6 +166,16 @@ const nextSlide = () => {
   height: 90vh;
   min-width: 700px;
 }
+
+/*
+TODO: remove this and make component work
+Context: This removes .rigth for viewports under 700 (such as mobile) due to css issues.
+*/
+@media (max-width: 700px) {
+  .right {
+    display: none;
+  }
+}
 .page-header {
   display: flex;
   flex-direction: column;
