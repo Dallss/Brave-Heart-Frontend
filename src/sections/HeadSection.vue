@@ -152,6 +152,10 @@ const nextSlide = () => {
   .page-part {
     min-width: 100%; /* or simply remove the restriction */
   }
+  .left {
+    height: 90vh;  /*  Reduce height of ehader on mobileview */
+  }
+
 }
 .left {
   display: flex;
@@ -187,7 +191,6 @@ Context: This removes .rigth for viewports under 700 (such as mobile) due to css
   left: 0;
   top: 0;
   padding: 10px;
-  font-size: large;
   height: fit-content;
   margin: 0;
 }
@@ -196,6 +199,7 @@ Context: This removes .rigth for viewports under 700 (such as mobile) due to css
   display: flex;
   align-items: center;
   font-weight: 400;
+  font-size: clamp(0.2rem, 0.5rem + 1vw, 0.8rem);
 }
 
 .title {
@@ -207,12 +211,12 @@ Context: This removes .rigth for viewports under 700 (such as mobile) due to css
   max-width: 90%;
 }
 .main-title {
-  font-size: clamp(2.5rem, 5vw + 1rem, 5rem);
+  font-size: clamp(2.5rem, 5vw + 1rem, 3.5rem);
   font-weight: 600;
   line-height: 1.2;
 }
 .subtitle {
-  font-size: clamp(1rem, 1.2vw + 0.5rem, 1.5rem);
+  font-size: clamp(1rem, 1.2vw + 0.5rem, 1.2rem);
   font-weight: 200;
   font-style: italic;
 }
@@ -220,13 +224,13 @@ Context: This removes .rigth for viewports under 700 (such as mobile) due to css
   justify-content: center;
 }
 .contact-header {
-  font-size: 1.2rem;
   font-weight: 600;
   margin-top: 0;
 }
 .contact-header,
 .contact-phone,
 .contact-email {
+  font-size: clamp(0.5rem, 0.5rem + 0.8vw, 0.8rem);
   text-align: center;
   margin-bottom: 10px;
 }

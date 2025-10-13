@@ -54,7 +54,6 @@ import BaseSection from './BaseSection.vue'
   align-self: flex-start;
 }
 
-/* ✅ Responsive video container */
 .video-container {
   position: relative;
   width: 80%;
@@ -110,7 +109,7 @@ import BaseSection from './BaseSection.vue'
   font-weight: 700;
 }
 
-/* ✅ Make layout stack nicely on small screens */
+/* Make layout stack nicely on small screens */
 @media (max-width: 700px) {
   .how-to-use-section {
     padding: 100px 5vw;
