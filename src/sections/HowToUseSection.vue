@@ -1,7 +1,7 @@
 <template>
   <base-section class="how-to-use-section" height="fit-content">
-    <h2 class="how-to-use-title">How to Use a Fire Extinguisher</h2>
     <div class="how-to-use-content">
+      <h2 class="how-to-use-title">How to Use a Fire Extinguisher</h2>
       <div class="video-container">
         <iframe
           class="video"
@@ -43,7 +43,6 @@ import BaseSection from './BaseSection.vue'
   overflow: hidden;
   text-align: left;
   width: 100vw;
-  padding: 200px 6vw;
 }
 
 .how-to-use-title {
@@ -57,7 +56,7 @@ import BaseSection from './BaseSection.vue'
 .video-container {
   position: relative;
   width: 80%;
-  max-width: 560px;
+  max-width: 700px;
   aspect-ratio: 16 / 9;
 }
 
@@ -72,14 +71,16 @@ import BaseSection from './BaseSection.vue'
 
 .how-to-use-content {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   width: 100%;
+  max-width: 900px;
   gap: 2rem;
   justify-content: center;
+  align-items: center;
+  padding: 0px 2rem;
 }
 
 .how-to-use-text {
-  width: auto;
   background-color: rgba(251, 255, 149, 0.287);
   padding: 10px 30px;
   border: 3px solid rgba(232, 232, 0, 0.706);
