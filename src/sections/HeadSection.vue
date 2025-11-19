@@ -14,11 +14,13 @@
         </div>
       </div>
       <div class="page-header">
-        <div class="title">
-          <h1 class="main-title">{{ company.name }}</h1>
-          <p class="subtitle">{{ company.slogan }}</p>
+        <div class="company-intro">
+          <img src="@/assets/logo-naked.png" alt="Brave Heart logo" class="logo">
+          <div class="title">
+            <h1 class="main-title">{{ company.name }}</h1>
+            <p class="subtitle">{{ company.slogan }}</p>
+          </div>
         </div>
-
         <div class="contact-info">
           <p class="contact-header">Contact Us</p>
           <p class="contact-phone">123-456-7890</p>
@@ -141,7 +143,7 @@ const nextSlide = () => {
   flex-wrap: wrap;
 }
 .page-part {
-  height: 110vh;
+  height: 80vh;
   width: 100%;
   flex: 1;
   position: relative;
@@ -167,8 +169,8 @@ const nextSlide = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 90vh;
   min-width: 700px;
+  /* background-color: #c6c6c6; */
 }
 
 /*
@@ -185,6 +187,21 @@ Context: This removes .rigth for viewports under 700 (such as mobile) due to css
   flex-direction: column;
   height: 100%;
   width: 80%;
+  align-items: center;
+  justify-content: center;
+}
+.logo {
+  width: 150px;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+}
+.company-intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: auto;
+  flex-wrap: wrap;
 }
 .nav {
   position: absolute;
@@ -203,11 +220,12 @@ Context: This removes .rigth for viewports under 700 (such as mobile) due to css
 }
 
 .title {
-  height: 65vh;
+  height: fit-content;
   align-self: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   max-width: 90%;
 }
 .main-title {
@@ -222,6 +240,8 @@ Context: This removes .rigth for viewports under 700 (such as mobile) due to css
 }
 .contact-info {
   justify-content: center;
+  margin-top: auto;
+  margin-bottom: 4rem;
 }
 .contact-header {
   font-weight: 600;
