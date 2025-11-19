@@ -84,6 +84,7 @@ onMounted(() => {
 <style scoped>
 .shop-section {
   padding: 10vw;
+  padding-top: 2rem;
   display: flex;
   flex-direction: column;
   color: black;
@@ -91,7 +92,7 @@ onMounted(() => {
 }
 .shop-header {
   font-size: clamp(1rem, 2vw + 0.5rem, 2.5rem);
-  font-weight: 600;
+  font-weight: 900;
   color: #000000;
   margin-bottom: 2rem;
   font-family: fjalla-one;
