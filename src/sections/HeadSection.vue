@@ -215,8 +215,8 @@ Context: This removes .rigth for viewports under 700 (such as mobile) due to css
 .link a {
   display: flex;
   align-items: center;
-  font-weight: 400;
-  font-size: clamp(0.2rem, 0.5rem + 1vw, 0.8rem);
+  font-weight: 150;
+  font-size: clamp(0.2rem, 0.6rem + 0.5vw, 0.9rem);
 }
 
 .title {
@@ -243,16 +243,18 @@ Context: This removes .rigth for viewports under 700 (such as mobile) due to css
   margin-top: auto;
   margin-bottom: 4rem;
 }
-.contact-header {
-  font-weight: 600;
-  margin-top: 0;
-}
 .contact-header,
 .contact-phone,
 .contact-email {
   font-size: clamp(0.5rem, 0.5rem + 0.8vw, 0.8rem);
   text-align: center;
   margin-bottom: 10px;
+  color: #dadada;
+}
+.contact-header {
+  font-weight: 600;
+  font-size: clamp(0.6rem, 0.6rem + 1vw, 1rem);
+  margin-top: 0;
 }
 .type-select-content {
   position: relative;
