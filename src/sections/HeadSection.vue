@@ -41,10 +41,16 @@
           </div>
         </div>
 
-        <div v-if="normalizedTypes.length > 1" class="slider-controls">
+        <div v-if="normalizedTypes.length >= 1" class="slider-controls">
           <button class="nav-button" @click="prevSlide">
             <icon-lucide-chevron-left class="arrow-icon" />
           </button>
+
+          <div class="type-selected-indicator">
+            {{ normalizedTypes[currentSlide] }}
+          </div>
+
+          <!-- Add text of type here [A,B,etc]-->
           <button class="nav-button" @click="nextSlide">
             <icon-lucide-chevron-right class="arrow-icon" />
           </button>
@@ -73,6 +79,7 @@ import TypeSelector from '../components/TypeSelector.vue'
 const extinguisherType = ref(['A', 'B', 'C'])
 const sliderRef = ref(null)
 let sliderInstance = null
+let currentSlide = ref(0)
 
 const normalizedTypes = computed(() =>
   Array.isArray(extinguisherType.value) ? extinguisherType.value : [extinguisherType.value],
@@ -110,6 +117,9 @@ const initSlider = () => {
     sliderInstance = new KeenSlider(sliderRef.value, {
       loop: true,
       slides: { perView: 1 },
+      slideChanged(s) {
+        currentSlide.value = s.track.details.rel
+      },
     })
   }
 }
@@ -279,7 +289,7 @@ Context: This removes .rigth for viewports under 700 (such as mobile) due to css
 }
 .extinguisher-image {
   width: 80%;
-  height: auto;
+  aspect-ratio: 2/3;
   max-width: 100%;
   object-fit: contain;
   box-sizing: border-box;
@@ -287,23 +297,31 @@ Context: This removes .rigth for viewports under 700 (such as mobile) due to css
 }
 .slider-controls {
   position: absolute;
-  top: 50%;
-  width: 100%;
+  bottom: -2rem;
+  width: 60%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   transform: translateY(-50%);
   padding: 0 1rem;
 }
 .nav-button {
   background-color: rgba(255, 255, 255, 0);
-  color: #00000036;
+  color: #ffffff;
   border: none;
-  font-size: 2rem;
+  font-size: 1.5rem;
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  width: 1.8rem;        /* fixed width */
+  height: 1.8rem;       /* fixed height, same as width */
+  border-radius: 50%; /* makes it a circle */
+  display: flex;       /* center the content */
+  align-items: center; /* center vertically */
+  justify-content: center; /* center horizontally */
   user-select: none;
   transition: background 0.2s ease;
+  background-color: rgb(220, 220, 220);
 }
+
 .nav-button:hover {
   background-color: rgba(200, 200, 200, 0.9);
 }
