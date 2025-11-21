@@ -46,8 +46,8 @@
             <icon-lucide-chevron-left class="arrow-icon" />
           </button>
 
-          <div class="type-selected-indicator">
-            {{ normalizedTypes[currentSlide] }}
+          <div class="selected-class-indicator">
+            Class: {{ normalizedTypes[currentSlide] }}
           </div>
 
           <!-- Add text of type here [A,B,etc]-->
@@ -112,7 +112,6 @@ const initSlider = () => {
   if (sliderInstance) {
     sliderInstance.destroy()
   }
-
   if (sliderRef.value && normalizedTypes.value.length > 0) {
     sliderInstance = new KeenSlider(sliderRef.value, {
       loop: true,
@@ -288,22 +287,33 @@ Context: This removes .rigth for viewports under 700 (such as mobile) due to css
   justify-content: center;
 }
 .extinguisher-image {
-  width: 80%;
+  width: 70%;
   aspect-ratio: 2/3;
   max-width: 100%;
   object-fit: contain;
   box-sizing: border-box;
   margin: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border: 0.2px solid rgba(0, 0, 0, 0.243);
 }
 .slider-controls {
   position: absolute;
-  bottom: -2rem;
+  bottom: -5rem;
   width: 60%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   transform: translateY(-50%);
   padding: 0 1rem;
+}
+.selected-class-indicator {
+  padding: 0.8rem;
+  background-color: #ffffff; /* dirty/off-white */
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); soft floating effect */
+  border: 0.1px solid rgba(0, 0, 0, 0.329);
+
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 .nav-button {
   background-color: rgba(255, 255, 255, 0);
