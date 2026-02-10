@@ -89,7 +89,7 @@ import imgA from '@/assets/fire-extinguisher/A.png'
 import imgB from '@/assets/fire-extinguisher/B.png'
 import imgC from '@/assets/fire-extinguisher/C.png'
 import imgD from '@/assets/fire-extinguisher/D.png'
-import imgK from '@/assets/fire-extinguisher/K.png'
+import imgF from '@/assets/fire-extinguisher/F.png'
 
 const company = {
   name: 'Brave Heart',
@@ -101,7 +101,7 @@ const imageMap = {
   B: imgB,
   C: imgC,
   D: imgD,
-  K: imgK,
+  F: imgF,
 }
 
 const getExtinguisherImage = (type) => {
