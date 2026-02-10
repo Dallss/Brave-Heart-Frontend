@@ -125,6 +125,10 @@ class ApiClient extends BaseService {
   // Make authenticated API calls with auto-refresh
   async request(endpoint, options = {}) {
     // Add authorization header if token exists
+    options.headers = {
+      ...(options.headers || {}),
+      "ngrok-skip-browser-warning": "true", // Always include
+    }
     const accessToken = this.tokenService.getAccessToken()
     if (accessToken) {
       options.headers = {
