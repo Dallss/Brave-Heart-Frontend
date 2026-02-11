@@ -49,7 +49,27 @@
       </section>
       <section class="panel panel-stocks">
         <h3>Stocks</h3>
-        <div class="panel-chart-placeholder"></div>
+        <div v-if="stocksLoading" class="stocks-loading">Loading stocks...</div>
+        <div v-else-if="stocksError" class="stocks-error">{{ stocksError }}</div>
+        <div v-else-if="!stockItems.length" class="stocks-empty">No stock items</div>
+        <div v-else class="stocks-list-wrap">
+          <table class="stocks-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Stock</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in stockItems" :key="item.id">
+                <td>{{ item.name }}</td>
+                <td :class="{ 'stock-low': isLowStock(item), 'stock-out': (item.stock ?? 0) === 0 }">
+                  {{ item.stock != null ? item.stock : '—' }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
     </div>
     <div class="dashboard-actions">
@@ -95,7 +115,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -108,8 +128,45 @@ import {
 import { Bar } from 'vue-chartjs'
 import DevPlaceholder from '../DevPlaceholder.vue'
 import BaseModal from '../modals/BaseModal.vue'
+import { apiClient } from '../../../utils/auth.js'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
+
+// Stocks from backend
+const stockItems = ref([])
+const stocksLoading = ref(true)
+const stocksError = ref(null)
+
+const LOW_STOCK_THRESHOLD = 5
+function isLowStock(item) {
+  const s = item.stock
+  return s != null && s > 0 && s <= LOW_STOCK_THRESHOLD
+}
+
+async function loadStockItems() {
+  stocksLoading.value = true
+  stocksError.value = null
+  try {
+    const response = await apiClient.get('/Product/by-type')
+    if (!response.ok) {
+      const text = await response.text()
+      throw new Error(text || `Failed to load products: ${response.status}`)
+    }
+    const data = await response.json()
+    // Same as InventoryTab: array of types, each with products[]; flatten to items with id, name, stock
+    stockItems.value = (Array.isArray(data) ? data : []).flatMap((type) => type.products || [])
+  } catch (err) {
+    console.error('Failed to load stock items:', err)
+    stocksError.value = err.message || 'Failed to load stocks'
+    stockItems.value = []
+  } finally {
+    stocksLoading.value = false
+  }
+}
+
+onMounted(() => {
+  loadStockItems()
+})
 
 // Placeholder data, easy to replace with axios-fetched data
 const monthStats = ref({
@@ -436,5 +493,51 @@ const liveTransactions = ref([
 }
 .panel-transactions .live-transactions-placeholder {
   margin-top: 1rem;
+}
+
+.stocks-loading,
+.stocks-error,
+.stocks-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  padding: 1rem;
+  color: #333;
+}
+.stocks-error {
+  color: #c00;
+}
+.stocks-empty {
+  color: #333;
+}
+.stocks-list-wrap {
+  flex: 1;
+  overflow: auto;
+  min-height: 0;
+}
+.stocks-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.stocks-table th,
+.stocks-table td {
+  border-bottom: 1px solid #eee;
+  padding: 0.5rem 0.6rem;
+  text-align: left;
+  color: #333;
+}
+.stocks-table th {
+  color: #5a1818;
+  font-weight: 600;
+  background: #f7f7f7;
+}
+.stocks-table .stock-low {
+  color: #b8860b;
+}
+.stocks-table .stock-out {
+  color: #c00;
 }
 </style>
