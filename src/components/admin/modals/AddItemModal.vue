@@ -27,7 +27,15 @@
       <input v-model="form.stock" type="number" required />
 
       <label>Product Image</label>
-      <div class="drop-area" @dragover.prevent @drop.prevent="handleDrop($event)">
+      <div
+        class="drop-area"
+        role="button"
+        tabindex="0"
+        @click="fileInput?.click()"
+        @keydown.enter="fileInput?.click()"
+        @dragover.prevent
+        @drop.prevent="handleDrop($event)"
+      >
         <div v-if="uploading" class="uploading">
           <span>Uploading image...</span>
         </div>
@@ -86,6 +94,7 @@
 import BaseModal from './BaseModal.vue'
 import { ref, watch, onMounted, computed } from 'vue'
 import { useProductApi } from '../../../composables/useProductApi.js'
+import { apiClient } from '../../../utils/auth.js'
 
 const fileInput = ref(null)
 const props = defineProps({ show: Boolean })
@@ -133,14 +142,17 @@ const form = ref({
   attributeValues: {},
 })
 
-function resetForm() {
+function resetForm(preserveImage = false) {
+  const keepFile = preserveImage ? form.value.imageFile : null
+  const keepUrl = preserveImage ? form.value.imageUrl : ''
+
   form.value = {
     name: '',
     price: 0,
     stock: 0,
     productTypeId: selectedTypeId.value,
-    imageFile: null,
-    imageUrl: '',
+    imageFile: keepFile,
+    imageUrl: keepUrl,
     attributeValues: {},
   }
 
@@ -190,7 +202,7 @@ watch(
 watch(selectedTypeId, (newId) => {
   if (newId) {
     form.value.productTypeId = newId
-    resetForm()
+    resetForm(true) // preserve image when user changes product type
   }
 })
 
@@ -258,6 +270,41 @@ async function handleSubmit() {
   }
 
   try {
+    let imageUrlToSend = form.value.imageUrl || ''
+
+    // Upload image to Cloudinary if user selected a file
+    if (form.value.imageFile) {
+      uploading.value = true
+      try {
+        const imageFile = form.value.imageFile
+        const folder = 'brave-heart-images/product-images'
+        const signatureResponse = await apiClient.get(
+          `/Cloudinary/signature?folder=${encodeURIComponent(folder)}`,
+        )
+        if (!signatureResponse.ok) throw new Error('Failed to get upload signature')
+        const signatureData = await signatureResponse.json()
+        const formDataUpload = new FormData()
+        formDataUpload.append('file', imageFile)
+        formDataUpload.append('api_key', signatureData.apiKey)
+        formDataUpload.append('timestamp', signatureData.timestamp)
+        formDataUpload.append('signature', signatureData.signature)
+        formDataUpload.append('folder', folder)
+        const uploadResponse = await fetch(
+          'https://api.cloudinary.com/v1_1/' + signatureData.cloudName + '/image/upload',
+          {
+            method: 'POST',
+            body: formDataUpload,
+          },
+        )
+        if (!uploadResponse.ok) throw new Error('Failed to upload image')
+        const uploadResult = await uploadResponse.json()
+        imageUrlToSend = uploadResult.secure_url
+        form.value.imageUrl = imageUrlToSend
+      } finally {
+        uploading.value = false
+      }
+    }
+
     // Prepare the product data with correct API structure
     const productData = {
       Name: form.value.name.trim(),
@@ -269,9 +316,9 @@ async function handleSubmit() {
         Value: value.toString(),
       })),
     }
-
-    // TODO: Handle image upload if needed
-    // For now, we'll just create the product without image
+    if (imageUrlToSend) {
+      productData.ImageUrl = imageUrlToSend
+    }
 
     const createdProduct = await createProduct(productData)
     emit('submit', createdProduct)

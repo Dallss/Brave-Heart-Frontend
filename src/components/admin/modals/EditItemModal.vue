@@ -50,7 +50,15 @@
           <img :src="currentImageUrl" alt="Current product image" class="preview-image" />
           <p class="current-image-text">Current image</p>
         </div>
-        <div class="drop-area" @dragover.prevent @drop.prevent="handleDrop($event)">
+        <div
+          class="drop-area"
+          role="button"
+          tabindex="0"
+          @click="fileInput?.click()"
+          @keydown.enter="fileInput?.click()"
+          @dragover.prevent
+          @drop.prevent="handleDrop($event)"
+        >
           <div v-if="uploading" class="uploading">
             <span>Uploading image...</span>
           </div>
