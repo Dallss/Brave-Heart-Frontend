@@ -34,7 +34,7 @@ const allProducts = computed(() => {
       ? type.products.map((product) => ({
           ...product,
           class: type.name, // Use product type name as class
-          range: `$${product.price}`, // Use price as range
+          range: `${product.price}`, // Use price as range
           image: product.imageUrl || 'https://placehold.co/300x500?text=Item+Image',
         }))
       : [],

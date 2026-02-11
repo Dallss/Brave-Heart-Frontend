@@ -200,7 +200,7 @@ Context: This removes .rigth for viewports under 700 (such as mobile) due to css
   justify-content: center;
 }
 .logo {
-  width: 220px;
+  width: 150px;
   aspect-ratio: 1/1;
   object-fit: contain;
 }
@@ -238,7 +238,7 @@ Context: This removes .rigth for viewports under 700 (such as mobile) due to css
   max-width: 90%;
 }
 .main-title {
-  font-size: clamp(3rem, 6vw + 1rem, 4.5rem);
+  font-size: clamp(1.8rem, 6vw + 1rem, 3.2rem);
   font-weight: 700;
   line-height: 1.2;
 }
