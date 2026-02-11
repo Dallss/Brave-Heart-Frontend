@@ -25,7 +25,7 @@
       </section>
       <section class="panel panel-transactions">
         <h3>Live Transactions</h3>
-        <table class="transactions-table">
+        <!-- <table class="transactions-table">
           <thead>
             <tr>
               <th>Customer</th>
@@ -38,7 +38,8 @@
               <td>{{ tx.details }}</td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
+        <DevPlaceholder class="live-transactions-placeholder" label="Under dev" />
       </section>
       <section class="panel panel-stocks">
         <h3>Stocks</h3>
@@ -50,6 +51,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import DevPlaceholder from '../DevPlaceholder.vue'
 
 // Placeholder data, easy to replace with axios-fetched data
 const monthStats = ref({
@@ -177,5 +179,8 @@ const liveTransactions = ref([
   color: #5a1818;
   font-weight: 600;
   background: #f7f7f7;
+}
+.panel-transactions .live-transactions-placeholder {
+  margin-top: 1rem;
 }
 </style>

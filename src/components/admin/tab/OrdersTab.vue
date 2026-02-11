@@ -3,10 +3,15 @@
     <div class="dashboard-header">
       <h2>Orders</h2>
     </div>
+    <div class="placeholder-section">
+      <DevPlaceholder label="Under dev" />
+    </div>
   </main>
 </template>
 
-<script setup></script>
+<script setup>
+import DevPlaceholder from '../DevPlaceholder.vue'
+</script>
 
 <style scoped>
 .admin-dashboard {
@@ -68,6 +73,10 @@
   font-size: 2rem;
   color: #5a1818;
   margin: 0;
+}
+.placeholder-section {
+  flex: 1;
+  margin-top: 1rem;
 }
 .dashboard-panels {
   display: grid;
